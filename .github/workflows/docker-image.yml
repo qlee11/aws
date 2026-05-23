@@ -17,8 +17,11 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag qlee94/tavernquest:latest
       
+  tf-init:
+    runs-on: ubuntu-latest
+    steps:
     - uses: hashicorp/setup-terraform@v2.0.3
-    - name: HashiCorp - Setup Terraform
+    - name: Terraform Init
       env:
           AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -28,4 +31,19 @@ jobs:
         echo "AWS_ACCESS_KEY_ID:" ${{ env.AWS_ACCESS_KEY_ID }}
         echo "AWS_SECRET_ACCESS_KEY:" ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         terraform init
-            
+        
+  tf-plan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: hashicorp/setup-terraform@v2.0.3
+    - name: Terraform Plan
+      run: terraform plan
+      
+  tf-apply:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: hashicorp/setup-terraform@v2.0.3
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+
+              
