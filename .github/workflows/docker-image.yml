@@ -23,6 +23,7 @@ jobs:
       run: docker build . --file Dockerfile --tag qlee94/tavernquest:latest
       
   tf-init:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: hashicorp/setup-terraform@v2.0.3
