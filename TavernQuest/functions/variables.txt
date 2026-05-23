@@ -1,0 +1,53 @@
+#act
+act=1
+
+textspeed="pv -qL 20"
+
+#enemies
+
+#drunk
+drunk_health=50
+drunk_str=1
+drunk_armor="no armor"
+
+current_drunk_health=$drunk_health
+current_drunk_str=$drunk_str
+current_drunk_armor=$drunk_armor
+
+#priest
+priest_health=100
+priest_str=2
+priest_armor=20
+
+current_priest_health=$priest_health
+current_priest_str=$priest_str
+current_priest_armor=$priest_armor
+
+#orc
+orc_health=150
+orc_str=1
+orc_armor="no armor"
+
+#hero
+hero_health=100
+hero_str=2
+hero_armor=10
+hero_def=$(expr $hero_armor / 100)
+
+current_hero_health=$hero_health
+current_hero_str=$hero_str
+current_hero_armor=$hero_armor
+
+#inventory
+hp_potion=0
+declare -a stash=( "Health potion="$hp_potion )
+
+#colors
+RED="\e[31m"
+LIGHT_CYAN="\e[96m"
+YELLOW="\e[33m"
+LIGHT_YELLOW="\e[93m"
+LIGHT_BLUE="\e[94m"
+GREEN="\e[32m"
+ENDCOLOR="\e[0m"
+MAGENTA="\e[35m"
