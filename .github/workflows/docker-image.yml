@@ -22,34 +22,30 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag qlee94/tavernquest:latest
       
-  tf-init:
+  tf-init-plan:
     needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Terraform Init
-      #env:
-      #    AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
-      #    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #    FRUIT: ${{ vars.FRUIT }}
       run: |
-        echo "Fruit:" ${{ vars.FRUIT }}
-        echo "AWS_ACCESS_KEY_ID:" ${{ env.AWS_ACCESS_KEY_ID }}
-        echo "AWS_SECRET_ACCESS_KEY:" ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        terraform init
-        
-  tf-plan:
-    needs: tf-init
-    runs-on: ubuntu-latest
-    steps:
-    - uses: hashicorp/setup-terraform@v2.0.3
-    - name: Terraform Plan
-      run: |
+        #echo "AWS_ACCESS_KEY_ID:" ${{ env.AWS_ACCESS_KEY_ID }}
+        #echo "AWS_SECRET_ACCESS_KEY:" ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         terraform init
         terraform plan
+        
+ # tf-plan:
+ #   needs: tf-init
+ #   runs-on: ubuntu-latest
+ #   steps:
+ #   - uses: hashicorp/setup-terraform@v2.0.3
+ #   - name: Terraform Plan
+ #     run: |
+ #       terraform init
+        
       
   tf-apply:
-    needs: tf-plan
+    needs: tf-init-plan
     runs-on: ubuntu-latest
     steps:
     - uses: hashicorp/setup-terraform@v2.0.3
