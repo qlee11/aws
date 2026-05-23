@@ -20,7 +20,7 @@ jobs:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: HashiCorp - Setup Terraform
       env:
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         echo $AWS_ACCESS_KEY_ID
