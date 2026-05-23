@@ -9,8 +9,7 @@ on:
 env:
     AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    FRUIT: ${{ vars.FRUIT }}
-
+    
 jobs:
 
   build:
@@ -20,45 +19,53 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag qlee94/tavernquest:latest
+      run: |
+        pwd
+        ls -lah
+        docker build . --file Dockerfile --tag qlee94/tavernquest:latest
       
-  tf-init-plan:
+  tf-init:
     needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - uses: actions/checkout@v4
+    - uses: actions/cache@v5.0.5
+      with:
+        path: 
     - name: Terraform Init
       run: |
         #echo "AWS_ACCESS_KEY_ID:" ${{ env.AWS_ACCESS_KEY_ID }}
         #echo "AWS_SECRET_ACCESS_KEY:" ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         terraform init
         
- # tf-plan:
- #   needs: tf-init
- #   runs-on: ubuntu-latest
- #   steps:
- #   - uses: hashicorp/setup-terraform@v2.0.3
- #   - name: Terraform Plan
- #     run: |
- #       terraform init
+  tf-plan:
+    needs: tf-init
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v2.0.3
+    - name: Terraform Plan
+      run: |
+       terraform plan
         
       
-  tf-apply:
-    needs: tf-init-plan
-    runs-on: ubuntu-latest
-    steps:
-    - uses: hashicorp/setup-terraform@v2.0.3
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-
-  tf-destroy:
-    
-    needs: tf-apply
-    runs-on: ubuntu-latest
-    steps:
-    - uses: hashicorp/setup-terraform@v2.0.3
-    - name: Terraform Destroy
-      run: terraform destroy -auto-approve
+ # tf-apply:
+ #   needs: tf-plan
+ #   runs-on: ubuntu-latest
+ #   steps:
+ #   - uses: actions/checkout@v4
+ #   - uses: hashicorp/setup-terraform@v2.0.3
+ #   - name: Terraform Apply
+ #     run: terraform apply -auto-approve
+  
+ # tf-destroy:
+ #   needs: tf-apply
+ #   runs-on: ubuntu-latest
+ #   steps:
+ #   - uses: actions/checkout@v4
+ #   - uses: hashicorp/setup-terraform@v2.0.3
+ #   - name: Terraform Destroy
+ #     run: terraform destroy -auto-approve
 
               
