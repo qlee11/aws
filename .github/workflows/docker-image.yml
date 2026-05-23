@@ -30,9 +30,6 @@ jobs:
     steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - uses: actions/checkout@v4
-    - uses: actions/cache@v5.0.5
-      with:
-        path: 
     - name: Terraform Init
       run: |
         #echo "AWS_ACCESS_KEY_ID:" ${{ env.AWS_ACCESS_KEY_ID }}
@@ -44,6 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with: 
+        key: hashFiles 
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Terraform Plan
       run: |
