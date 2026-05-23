@@ -44,7 +44,9 @@ jobs:
     steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Terraform Plan
-      run: terraform plan
+      run: |
+        terraform init
+        terraform plan
       
   tf-apply:
     needs: tf-plan
