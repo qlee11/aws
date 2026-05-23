@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "ecr-qlee"
+    bucket = "gh-test-bucket-qlee"
     key    = "state"
     region = "eu-central-1"
   }
