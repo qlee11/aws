@@ -22,7 +22,9 @@ jobs:
       env:
           AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          FRUIT: ${{ vars.FRUIT }}
       run: |
+        echo "Fruit:" ${{ env.FRUIT }}
         echo "AWS_ACCESS_KEY_ID:" ${{ env.AWS_ACCESS_KEY_ID }}
         echo "AWS_SECRET_ACCESS_KEY:" ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         terraform init
