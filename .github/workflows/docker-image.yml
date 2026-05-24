@@ -32,23 +32,25 @@ jobs:
          terraform plan
         
       
- # tf-apply:
- #   needs: tf-plan
- #   runs-on: ubuntu-latest
- #   steps:
- #   - uses: actions/checkout@v4
- #   - uses: hashicorp/setup-terraform@v2.0.3
- #   - name: Terraform Apply
- #     run: terraform apply -auto-approve
+  tf-apply:
+    needs: build
+    environment: Terraform Apply
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v2.0.3
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
   
- # tf-destroy:
- #   needs: tf-apply
- #   runs-on: ubuntu-latest
- #   steps:
- #   - uses: actions/checkout@v4
- #   - uses: hashicorp/setup-terraform@v2.0.3
- #   - name: Terraform Destroy
- #     run: terraform destroy -auto-approve
+  tf-destroy:
+    needs: tf-apply
+    environment: Terraform Apply
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v2.0.3
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
 
    # steps:
    # - uses: actions/checkout@v4
