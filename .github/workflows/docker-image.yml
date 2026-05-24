@@ -44,19 +44,20 @@ jobs:
         terraform init
         terraform apply -auto-approve
 
- # docker-build-push:
- #   needs: tf-apply
- #   runs-on: ubuntu-latest
- #    steps:
- #   - uses: actions/checkout@v4
- #   - name: Build the Docker image
- #     run: |
- #       pwd
- #       ls -lah
- #       docker build . --file Dockerfile --tag qlee94/tavernquest:latest
+  docker-build-push:
+    needs: tf-apply
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: aws-actions/setup-sam@v3
+    - name: Build the Docker image
+      run: |
+        aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 982081085352.dkr.ecr.eu-central-1.amazonaws.com
+        docker build . --file Dockerfile --tag qlee94/tavernquest:latest
+        docker push 982081085352.dkr.ecr.eu-central-1.amazonaws.com/tavernquest:latest
         
   tf-destroy:
-    needs: tf-apply
+    needs: docker-build-push
     environment: Terraform Apply
     runs-on: ubuntu-latest
     steps:
