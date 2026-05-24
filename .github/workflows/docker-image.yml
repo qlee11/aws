@@ -40,7 +40,9 @@ jobs:
     - uses: actions/checkout@v4
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Terraform Apply
-      run: terraform apply -auto-approve
+      run: |
+        terraform init
+        terraform apply -auto-approve
   
   tf-destroy:
     needs: tf-apply
