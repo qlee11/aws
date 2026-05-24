@@ -43,9 +43,20 @@ jobs:
       run: |
         terraform init
         terraform apply -auto-approve
-  
+
+ # docker-build-push:
+ #   needs: tf-apply
+ #   runs-on: ubuntu-latest
+ #    steps:
+ #   - uses: actions/checkout@v4
+ #   - name: Build the Docker image
+ #     run: |
+ #       pwd
+ #       ls -lah
+ #       docker build . --file Dockerfile --tag qlee94/tavernquest:latest
+        
   tf-destroy:
-    needs: tf-apply
+    needs: docker-build-push
     environment: Terraform Apply
     runs-on: ubuntu-latest
     steps:
@@ -55,12 +66,6 @@ jobs:
       run: |
         terraform init -reconfigure
         terraform destroy -auto-approve
+        
 
-   # steps:
-   # - uses: actions/checkout@v4
-   # - name: Build the Docker image
-   #   run: |
-   #     pwd
-   #     ls -lah
-   #     docker build . --file Dockerfile --tag qlee94/tavernquest:latest
               
