@@ -52,7 +52,9 @@ jobs:
     - uses: actions/checkout@v4
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Terraform Destroy
-      run: terraform destroy -auto-approve
+      run: |
+        terraform init -reconfigure
+        terraform destroy -auto-approve
 
    # steps:
    # - uses: actions/checkout@v4
