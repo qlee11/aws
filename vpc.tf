@@ -8,6 +8,6 @@ resource "aws_subnet" "test-subnet"{
 }
 
 resource "aws_network_interface" "NIC" {
-  subnet_id   = resource.aws_vpc.test-subnet.id
+  subnet_id   = resource.aws_subnet.test-subnet.id
   private_ips = ["172.16.10.100"]
 }
