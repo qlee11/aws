@@ -13,3 +13,7 @@ resource "aws_instance" "tavernquest" {
     network_interface_id = resource.aws_network_interface.test-nic.id
   }
 }
+
+resource "aws_ec2_instance_connect_endpoint" "connect" {
+  subnet_id = resource.aws_subnet.test-subnet.id
+}
