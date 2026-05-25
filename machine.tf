@@ -4,6 +4,6 @@ resource "aws_instance" "tavernquest" {
   vpc_security_group_ids = [resource.aws_security_group.allow_ssh.id]
 
   primary_network_interface {
-    network_interface_id = resource.aws_network_interface.NIC.id
+    network_interface_id = resource.aws_network_interface.test-nic.id
   }
 }
