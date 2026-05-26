@@ -8,12 +8,9 @@ resource "aws_instance" "tavernquest" {
   ami           = var.ami
   instance_type = var.machine_type
   key_name = aws_key_pair.deployer.id
+  associate_public_ip_address = true
 
   primary_network_interface {
     network_interface_id = resource.aws_network_interface.test-nic.id
   }
-}
-
-resource "aws_ec2_instance_connect_endpoint" "connect" {
-  subnet_id = resource.aws_subnet.test-subnet.id
 }
