@@ -9,6 +9,5 @@ resource "aws_subnet" "test-subnet" {
 
 resource "aws_network_interface" "test-nic" {
   subnet_id       = resource.aws_subnet.test-subnet.id
-  private_ips     = ["192.168.1.112"]
   security_groups = [resource.aws_security_group.allow_ssh.id]
 }
