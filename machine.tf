@@ -12,7 +12,4 @@ resource "aws_instance" "tavernquest" {
   subnet_id = aws_subnet.test-subnet.id
   security_groups = [ aws_security_group.allow_ssh.id ]
 
-  # primary_network_interface {
-  #   network_interface_id = resource.aws_network_interface.test-nic.id
-  # }
 }
