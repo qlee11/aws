@@ -7,7 +7,7 @@ variable "region" {
 variable "ami" {
   description = "AMI number"
   type        = string
-  default     = "ami-051eaec1417c5d4ae"
+  default     = "ami-0084513d521e0114e"
 }
 
 variable "machine_type" {
