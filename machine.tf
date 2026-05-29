@@ -11,5 +11,6 @@ resource "aws_instance" "tavernquest" {
   associate_public_ip_address = true
   subnet_id = aws_subnet.test-subnet.id
   security_groups = [ aws_security_group.allow_ssh.id ]
-
+  
+  depends_on = [aws_internet_gateway.gw]
 }
