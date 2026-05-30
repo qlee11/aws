@@ -6,7 +6,7 @@ resource "aws_vpc" "test-network" {
 
 resource "aws_subnet" "test-subnet" {
   vpc_id     = aws_vpc.test-network.id
-  cidr_block = "172.16.128.0/24"
+  cidr_block = "172.16.0.0/28"
 }
 #------------------------------------
 
