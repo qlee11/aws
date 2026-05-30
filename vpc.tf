@@ -18,13 +18,14 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_ec2_instance_connect_endpoint" "connect" {
+  depends_on = [ aws_route_table.ec2-instance-connect ]
   subnet_id = aws_subnet.test-subnet.id
   ip_address_type = "ipv4"
   preserve_client_ip = "true"
   security_group_ids = [aws_security_group.allow_instance_connect_endpoint.id]
 }
 
-resource "aws_route_table" "rt" {
+resource "aws_route_table" "internet-gw" {
   vpc_id = aws_vpc.test-network.id
   depends_on = [aws_internet_gateway.gw]
   route {
@@ -33,9 +34,18 @@ resource "aws_route_table" "rt" {
   }
 }
 
+resource "aws_route_table" "ec2-instance-connect" {
+  vpc_id = aws_vpc.test-network.id
+  depends_on = [aws_internet_gateway.gw]
+  route {
+    cidr_block = "172.16.0.0/24"
+    gateway_id = aws_instance.tavernquest.id
+  }
+}
+
 resource "aws_main_route_table_association" "a" {
   vpc_id         = aws_vpc.test-network.id
-  route_table_id = aws_route_table.rt.id
-  depends_on = [aws_route_table.rt]
+  route_table_id = aws_route_table.ec2-instance-connect.id
+  depends_on = [aws_route_table.ec2-instance-connect]
 }
 #------------------------------------
