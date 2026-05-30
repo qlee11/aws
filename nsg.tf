@@ -1,3 +1,5 @@
+# SG for the EC" instance
+#--------------------------------------------
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
   description = "Allow SSH inbound traffic and all outbound traffic"
@@ -17,3 +19,29 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = -1
 }
+#--------------------------------------------
+
+# SG for the Instace Connect Endpoint
+#--------------------------------------------
+resource "aws_security_group" "allow_instance_connect_endpoint" {
+  name        = "allow_instance_connect_endpoint"
+  description = "Allow allow_instance_connect_endpoint to the EC2 machine"
+  vpc_id      = resource.aws_vpc.test-network.id
+}
+
+resource "aws_vpc_security_group_ingress_rule" "private" {
+  security_group_id = aws_security_group.allow_instance_connect_endpoint.id
+  cidr_ipv4         = "192.168.1.0/24"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_egress_rule" "ec2" {
+  security_group_id = aws_security_group.allow_instance_connect_endpoint.id
+  cidr_ipv4         = "192.168.1.0/24"
+  from_port = 22
+  ip_protocol       = "tcp"
+  to_port = 22
+}
+#--------------------------------------------
