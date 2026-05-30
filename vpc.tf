@@ -46,6 +46,6 @@ resource "aws_route_table" "internet-gw" {
 resource "aws_main_route_table_association" "a" {
   vpc_id         = aws_vpc.test-network.id
   route_table_id = aws_route_table.internet-gw.id
-  depends_on = [aws_route_table.ec2-instance-connect]
+  depends_on = [aws_route_table.internet-gw]
 }
 #------------------------------------
