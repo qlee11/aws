@@ -36,7 +36,7 @@ resource "aws_route_table" "internet-gw" {
 
 resource "aws_route_table" "ec2-instance-connect" {
   vpc_id = aws_vpc.test-network.id
-  depends_on = [aws_internet_gateway.gw]
+  depends_on = [aws_instance.tavernquest]
   route {
     cidr_block = "172.16.0.0/24"
     gateway_id = aws_instance.tavernquest.id
