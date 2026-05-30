@@ -23,7 +23,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic" {
 }
 #--------------------------------------------
 
-# SG for the Instace Connect Endpoint
+# SG for the Instance Connect Endpoint
 #--------------------------------------------
 resource "aws_security_group" "allow_instance_connect_endpoint" {
   name        = "allow_instance_connect_endpoint"
