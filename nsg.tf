@@ -31,7 +31,7 @@ resource "aws_security_group" "allow_instance_connect_endpoint" {
 
 resource "aws_vpc_security_group_ingress_rule" "private" {
   security_group_id = aws_security_group.allow_instance_connect_endpoint.id
-  cidr_ipv4         = "192.168.1.0/24"
+  cidr_ipv4         = "0.0.0.0/0"
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
