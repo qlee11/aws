@@ -19,7 +19,9 @@ resource "aws_internet_gateway" "gw" {
 
 resource "aws_ec2_instance_connect_endpoint" "connect" {
   subnet_id = aws_subnet.test-subnet.id
-  security_group_ids = [aws_security_group.allow_ssh.id]
+  ip_address_type = "ipv4"
+  preserve_client_ip = "true"
+  security_group_ids = [aws_security_group.allow_instance_connect_endpoint.id]
 }
 
 resource "aws_route_table" "rt" {
