@@ -36,14 +36,14 @@ resource "aws_ec2_instance_connect_endpoint" "connect" {
   security_group_ids = [aws_security_group.allow_instance_connect_endpoint.id]
 }
 
-resource "aws_route_table" "internet-gw" {
-  vpc_id = aws_vpc.test-network.id
-  depends_on = [aws_internet_gateway.gw]
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.gw.id
-  }
-}
+# resource "aws_route_table" "internet-gw" {
+#   vpc_id = aws_vpc.test-network.id
+#   depends_on = [aws_internet_gateway.gw]
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     gateway_id = aws_internet_gateway.gw.id
+#   }
+# }
 
 # resource "aws_route_table" "ec2-instance-connect" {
 #   vpc_id = aws_vpc.test-network.id
@@ -54,9 +54,9 @@ resource "aws_route_table" "internet-gw" {
 #   }
 # }
 
-resource "aws_main_route_table_association" "a" {
-  vpc_id         = aws_vpc.test-network.id
-  route_table_id = aws_route_table.internet-gw.id
-  depends_on = [aws_route_table.internet-gw]
-}
+# resource "aws_main_route_table_association" "a" {
+#   vpc_id         = aws_vpc.test-network.id
+#   route_table_id = aws_route_table.internet-gw.id
+#   depends_on = [aws_route_table.internet-gw]
+# }
 #------------------------------------
