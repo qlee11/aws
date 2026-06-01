@@ -29,7 +29,7 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_ec2_instance_connect_endpoint" "connect" {
-  depends_on = [ aws_route_table.internet-gw ]
+  #depends_on = [ aws_route_table.internet-gw ]
   subnet_id = aws_subnet.test-subnet.id
   ip_address_type = "ipv4"
   preserve_client_ip = "true"
