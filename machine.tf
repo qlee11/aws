@@ -16,5 +16,5 @@ resource "aws_instance" "tavernquest" {
     network_interface_id = aws_network_interface.test-nic.id
   }
   
-  depends_on = [aws_internet_gateway.gw]
+  depends_on = [aws_network_interface.test-nic]
 }
