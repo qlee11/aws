@@ -8,6 +8,17 @@ resource "aws_subnet" "test-subnet" {
   vpc_id     = aws_vpc.test-network.id
   cidr_block = "172.16.0.0/28"
 }
+
+resource "aws_network_interface" "test-nic" {
+  subnet_id   = aws_subnet.test-subnet.id
+  private_ips = ["172.16.0.10"]
+
+  tags = {
+    Name = "primary_network_interface"
+  }
+}
+
+
 #------------------------------------
 
 # Instance Connect Endpoint + Internet gateway and route table entry to ensure connectivity to the internet
