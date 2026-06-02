@@ -6,12 +6,12 @@ resource "aws_vpc" "test-network" {
 
 resource "aws_subnet" "test-subnet" {
   vpc_id     = aws_vpc.test-network.id
-  cidr_block = "172.16.0.0/28"
+  cidr_block = "172.16.0.64/28"
 }
 
 resource "aws_subnet" "cluster-subnet" {
   vpc_id     = aws_vpc.test-network.id
-  cidr_block = "172.16.0.0/29"
+  cidr_block = "172.16.128/28"
   availability_zone = "eu-central-1b"
 }
 
