@@ -61,9 +61,9 @@ resource "aws_route_table" "nic-rt" {
 #   }
 # }
 
-resource "aws_main_route_table_association" "a" {
-  vpc_id         = aws_vpc.test-network.id
-  route_table_id = aws_route_table.nic-rt.id
-  depends_on = [aws_route_table.nic-rt]
-}
+# resource "aws_main_route_table_association" "a" {
+#   vpc_id         = aws_vpc.test-network.id
+#   route_table_id = aws_route_table.nic-rt.id
+#   depends_on = [aws_route_table.nic-rt]
+# }
 #------------------------------------
