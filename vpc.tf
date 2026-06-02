@@ -12,7 +12,7 @@ resource "aws_subnet" "test-subnet" {
 resource "aws_subnet" "cluster-subnet" {
   vpc_id     = aws_vpc.test-network.id
   cidr_block = "172.16.64.0/28"
-  availability_zone = "euc1-az2"
+  availability_zone = "eu-central-1b"
 }
 
 resource "aws_network_interface" "test-nic" {
