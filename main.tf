@@ -38,7 +38,7 @@ resource "aws_eks_cluster" "text-cluster" {
     role_arn = aws_iam_role.cluster.arn
 
     vpc_config {
-      subnet_ids = [ aws_subnet.test-subnet.id ]
+      subnet_ids = [ aws_subnet.test-subnet.id, aws_subnet.cluster-subnet.id ]
     }
 
 }

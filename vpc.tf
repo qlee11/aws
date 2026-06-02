@@ -9,6 +9,12 @@ resource "aws_subnet" "test-subnet" {
   cidr_block = "172.16.0.0/28"
 }
 
+resource "aws_subnet" "cluster-subnet" {
+  vpc_id     = aws_vpc.test-network.id
+  cidr_block = "172.16.64.0/28"
+  region = "eu-west-1"
+}
+
 resource "aws_network_interface" "test-nic" {
   subnet_id   = aws_subnet.test-subnet.id
   private_ips = ["172.16.0.10"]
