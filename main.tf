@@ -32,38 +32,3 @@ module "ecr" {
   })
 
 }
-
-resource "aws_ecs_task_definition" "test-tf" {
-  family = "service"
-  container_definitions = jsonencode([
-    {
-      name      = "first"
-      image     = "982081085352.dkr.ecr.eu-central-1.amazonaws.com/tavernquest:latest"
-      cpu       = 10
-      memory    = 512
-      essential = true
-      portMappings = [
-        {
-          containerPort = 80
-          hostPort      = 80
-        }
-      ]
-    },
-  ])
-}
-
-resource "aws_ecs_cluster" "test-cluster" {
-  name = "tavernquest"
-
-  setting {
-    name  = "containerInsights"
-    value = "enabled"
-  }
-}
-
-resource "aws_ecs_service" "tavernquest" {
-  name            = "tavernquest-service"
-  cluster         = aws_ecs_cluster.test-cluster.id
-  task_definition = aws_ecs_task_definition.test-tf.arn
-
-}
