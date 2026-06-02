@@ -11,7 +11,7 @@ resource "aws_subnet" "test-subnet" {
 
 resource "aws_subnet" "cluster-subnet" {
   vpc_id     = aws_vpc.test-network.id
-  cidr_block = "172.16.64.0/28"
+  cidr_block = "172.16.0.0/29"
   availability_zone = "eu-central-1b"
 }
 
