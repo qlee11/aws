@@ -63,6 +63,7 @@ resource "aws_iam_role" "cluster" {
     Statement = [
       {
         Action = [
+          "sts:AssumeRole",
           "sts:TagSession"
         ]
         Effect = "Allow"
