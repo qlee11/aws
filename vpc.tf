@@ -18,7 +18,7 @@ resource "aws_subnet" "cluster-subnet" {
 
 resource "aws_network_interface" "test-nic" {
   subnet_id   = aws_subnet.test-subnet.id
-  private_ips = ["172.16.0.129"]
+  private_ips = ["172.16.1.129"]
 
   tags = {
     Name = "primary_network_interface"

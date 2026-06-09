@@ -33,7 +33,7 @@ module "ecr" {
 
 }
 
-resource "aws_eks_cluster" "text-cluster" {
+resource "aws_eks_cluster" "test-cluster" {
     name = "test-custer"
     role_arn = aws_iam_role.cluster.arn
 
@@ -44,7 +44,7 @@ resource "aws_eks_cluster" "text-cluster" {
 }
 
 resource "aws_eks_node_group" "test-node-group" {
-    cluster_name = aws_eks_cluster.text-cluster.name
+    cluster_name = aws_eks_cluster.test-cluster.name
     node_group_name = "test-node-group"
     node_role_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
     subnet_ids = [ aws_subnet.test-subnet.id ]
@@ -63,7 +63,6 @@ resource "aws_iam_role" "cluster" {
     Statement = [
       {
         Action = [
-          "sts:AssumeRole",
           "sts:TagSession"
         ]
         Effect = "Allow"
