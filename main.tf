@@ -54,6 +54,11 @@ resource "aws_eks_node_group" "test-node-group" {
       max_size     = 2
       min_size     = 1
     }
+  depends_on = [ 
+    aws_iam_role_policy_attachment.cluster_AmazonEC2ContainerRegistryReadOnly,
+    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.cluster_AmazonEKSWorkerNodePolicy
+  ]
 }
 
 resource "aws_iam_role" "cluster" {
@@ -68,7 +73,10 @@ resource "aws_iam_role" "cluster" {
         ]
         Effect = "Allow"
         Principal = {
-          Service = "ec2.amazonaws.com"
+          Service = [
+            "ec2.amazonaws.com",
+            "eks.amazonaws.com"
+          ]
         }
       },
     ]
