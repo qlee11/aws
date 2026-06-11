@@ -10,12 +10,6 @@ resource "aws_subnet" "test-subnet" {
   availability_zone = "eu-central-1a"
 }
 
-resource "aws_subnet" "cluster-subnet" {
-  vpc_id     = aws_vpc.test-network.id
-  cidr_block = "172.16.2.0/24"
-  availability_zone = "eu-central-1b"
-}
-
 resource "aws_network_interface" "test-nic" {
   subnet_id   = aws_subnet.test-subnet.id
   private_ips = ["172.16.1.129"]
@@ -24,8 +18,6 @@ resource "aws_network_interface" "test-nic" {
     Name = "primary_network_interface"
   }
 }
-
-
 #------------------------------------
 
 # Instance Connect Endpoint + Internet gateway and route table entry to ensure connectivity to the internet
