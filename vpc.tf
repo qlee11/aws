@@ -10,11 +10,11 @@ resource "aws_subnet" "test-subnet" {
   availability_zone = "eu-central-1a"
 }
 
-# resource "aws_subnet" "cluster-subnet" {
-#   vpc_id     = aws_vpc.test-network.id
-#   cidr_block = "172.16.2.0/24"
-#   availability_zone = "eu-central-1b"
-# }
+resource "aws_subnet" "cluster-subnet" {
+  vpc_id     = aws_vpc.test-network.id
+  cidr_block = "172.16.2.0/24"
+  availability_zone = "eu-central-1b"
+}
 
 resource "aws_network_interface" "test-nic" {
   subnet_id   = aws_subnet.test-subnet.id
